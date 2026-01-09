@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
-import signupImage from "../../assets/signup.png"; 
 import { resetPassword } from "../../services/auth";
 import toast from "react-hot-toast";
 
@@ -52,8 +51,8 @@ function ResetPassword() {
       <div className="hidden lg:flex w-1/2 bg-blue-50 relative items-center justify-center overflow-hidden">
         <div className="absolute w-96 h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob top-20 right-20"></div>
         <img 
-          src={signupImage} 
-          alt="Reset Password" 
+          src=""
+          alt="" 
           className="relative z-10 w-3/4 max-w-md object-contain drop-shadow-xl"
         />
         <div className="absolute bottom-12 text-center">

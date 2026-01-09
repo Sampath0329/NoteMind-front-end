@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import signupImage from "../../assets/signup.png";
 import { forgotPassword } from "../../services/auth";
 import toast from "react-hot-toast";
 
@@ -43,8 +42,8 @@ function ForgotPassword() {
         <div className="absolute w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob bottom-10 right-10"></div>
 
         <img
-          src={signupImage}
-          alt="Forgot Password Illustration"
+          src=""
+          alt=""
           className="relative z-10 w-3/4 max-w-md object-contain drop-shadow-xl opacity-90"
         />
 
