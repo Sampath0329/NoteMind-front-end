@@ -10,18 +10,13 @@ function ForgotPassword() {
 
   const handleResetRequest = async (e: FormEvent) => {
     e.preventDefault();
-
     if (email === "") {
       toast.error("Please enter your email.");
       return;
     }
-
     setLoading(true);
-
     try {
-      console.log(email);
       const res = await forgotPassword({ email });
-
       if (res.status === 200 || res.data.success) {
         setIsSubmitted(true);
       } else {
@@ -30,122 +25,112 @@ function ForgotPassword() {
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong. Please try again.");
+    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex bg-white font-sans">
-      {/* --- Left Side: Image Section --- */}
-      <div className="hidden lg:flex w-1/2 bg-blue-50 relative items-center justify-center overflow-hidden">
-        <div className="absolute w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob top-10 left-10"></div>
-        <div className="absolute w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob bottom-10 right-10"></div>
+    <div className="min-h-screen flex bg-[#09090b] font-sans text-white relative overflow-hidden">
+      
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/20 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-pink-900/10 rounded-full blur-[120px]"></div>
+      </div>
 
-        <img
-          src=""
-          alt=""
-          className="relative z-10 w-3/4 max-w-md object-contain drop-shadow-xl opacity-90"
-        />
-
-        <div className="absolute bottom-12 text-center">
-          <h2 className="text-2xl font-bold text-gray-800">Don't worry! 🔐</h2>
-          <p className="text-gray-500 mt-2">
-            We'll help you recover your account.
+      <div className="hidden lg:flex w-1/2 relative flex-col items-center justify-center p-12">
+        <div className="relative z-10 text-center">
+          <div className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-wider text-purple-400 uppercase bg-purple-900/30 border border-purple-500/30 rounded-full">
+            ✨ AI-Powered Learning
+          </div>
+          <h2 className="text-5xl font-extrabold mb-6 leading-tight">
+            Don't <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">worry!</span> 🔐
+          </h2>
+          <p className="text-gray-400 text-lg max-w-md mx-auto">
+            We'll help you recover your account so you can continue your learning journey.
           </p>
         </div>
       </div>
 
-      {/* --- Right Side: Form Section --- */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-12 lg:px-24 py-12 bg-white">
-        {/* Back Link */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-12 lg:px-24 py-12 z-20">
+        
         <div className="mb-8">
           <Link
             to="/auth/login"
-            className="text-gray-400 hover:text-blue-500 text-sm flex items-center gap-1 transition-colors"
+            className="text-gray-500 hover:text-purple-400 text-sm flex items-center gap-1 transition-colors"
           >
             ← Back to Login
           </Link>
         </div>
 
-        {/* --- Logic: If NOT submitted, show Form. If submitted, show Success Message --- */}
-        {!isSubmitted ? (
-          <>
-            <div className="mb-10">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl mb-4">
-                🔑
+        <div className="bg-[#13131a] p-8 md:p-10 rounded-3xl border border-white/5 shadow-2xl">
+          {!isSubmitted ? (
+            <>
+              <div className="mb-10">
+                <h1 className="text-3xl font-bold mb-3">Forgot Password?</h1>
+                <p className="text-gray-400">
+                  Enter your email address to receive reset instructions.
+                </p>
               </div>
-              <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
-                Forgot Password?
-              </h1>
-              <p className="text-gray-500">
-                No worries, we'll send you reset instructions.
+
+              <form onSubmit={handleResetRequest} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      placeholder="name@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-4 py-3.5 rounded-xl bg-[#1c1c24] border border-white/10 focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all duration-200 text-white placeholder:text-gray-600"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={`w-full py-4 rounded-xl font-bold text-white transition-all duration-300 transform 
+                    ${
+                      loading
+                        ? "bg-purple-900/50 cursor-not-allowed"
+                        : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+                    }`}
+                >
+                  {loading ? "Sending Link..." : "Reset Password"}
+                </button>
+              </form>
+            </>
+          ) : (
+            <div className="text-center animate-fade-in">
+              <div className="w-20 h-20 bg-purple-500/10 rounded-full flex items-center justify-center text-4xl mb-6 mx-auto border border-purple-500/20 text-purple-400">
+                ✉️
+              </div>
+              <h2 className="text-3xl font-bold mb-4">Check your email</h2>
+              <p className="text-gray-400 mb-8 leading-relaxed">
+                A password reset link has been sent to <br />
+                <span className="font-semibold text-purple-400">{email}</span>
               </p>
-            </div>
 
-            <form onSubmit={handleResetRequest} className="space-y-6">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  placeholder="name@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200 text-gray-800"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-full py-3.5 rounded-full font-bold text-white shadow-lg shadow-blue-200 transform transition-all duration-200 
-                  ${
-                    loading
-                      ? "bg-blue-300 cursor-not-allowed"
-                      : "bg-blue-500 hover:bg-blue-600 hover:shadow-blue-300 active:scale-95"
-                  }`}
-              >
-                {loading ? "Sending Link..." : "Reset Password"}
-              </button>
-            </form>
-          </>
-        ) : (
-          /* --- Success View (Email Sent) --- */
-          <div className="text-center md:text-left animate-fade-in">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl mb-6 mx-auto md:mx-0">
-              ✉️
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Check your email
-            </h2>
-            <p className="text-gray-500 mb-8 leading-relaxed">
-              We have sent a password reset link to{" "}
-              <span className="font-semibold text-gray-800">{email}</span>.
-              Please check your inbox (and spam folder) and follow the
-              instructions.
-            </p>
-
-            <div className="space-y-4">
-              <button
-                onClick={() => window.open("https://gmail.com", "_blank")}
-                className="w-full py-3 rounded-full border border-gray-200 font-bold text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                Open Email App
-              </button>
-
-              <p className="text-sm text-center md:text-left text-gray-400">
-                Didn't receive the email?{" "}
+              <div className="space-y-4">
+                <button
+                  onClick={() => window.open("https://gmail.com", "_blank")}
+                  className="w-full py-3.5 rounded-xl border border-white/10 font-bold text-gray-300 hover:bg-white/5 transition-all"
+                >
+                  Open Email App
+                </button>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="text-blue-500 font-semibold hover:underline"
+                  className="text-sm text-purple-400 font-semibold hover:text-purple-300 underline underline-offset-4"
                 >
-                  Click to resend
+                  Try another email address
                 </button>
-              </p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
