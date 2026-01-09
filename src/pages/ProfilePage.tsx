@@ -8,7 +8,7 @@ import {
 } from '../services/Profile'
 import toast from 'react-hot-toast'
 function Profile() {
-  const { user, setUser } = useAuth()
+  const { setUser } = useAuth()
   const [loading, setLoading] = useState(false)
   const [imageLoading, setImageLoading] = useState(false)
   const [formData, setFormData] = useState({

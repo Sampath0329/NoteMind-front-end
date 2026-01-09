@@ -261,11 +261,5 @@ const FeatureBadge = ({ icon, text, gradient }: any) => (
   </div>
 )
 
-const StatCard = ({ value, label }: any) => (
-  <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-4 rounded-2xl border border-purple-500/20 text-center hover:border-purple-500/40 transition-all hover:scale-105">
-    <h3 className="text-2xl font-black text-white mb-1">{value}</h3>
-    <p className="text-xs text-gray-400 font-medium">{label}</p>
-  </div>
-)
 
 export default SignUp

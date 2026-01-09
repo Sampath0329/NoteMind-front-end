@@ -1,6 +1,5 @@
 import { AuthProvider } from "./Context/authContext";
 import Router from "./routes";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Toaster } from 'react-hot-toast';
 
 
