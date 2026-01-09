@@ -3,7 +3,7 @@ import { refreshTokens } from "./auth";
 
 
 const api = axios.create({
-  baseURL: "https://note-mind-back-end.vercel.app/api/v1",
+  baseURL: "https://rad-final-note-mind-back-end.vercel.app/api/v1",
   withCredentials: true
 })
 
